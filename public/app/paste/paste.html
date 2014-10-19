@@ -1,0 +1,37 @@
+﻿<div class="header noselect">
+    <div class="logo pull-left">&lt;CodePaste /&gt;</div>
+    <a class="function pull-left" ui-sref="paste_new"><i class="fa fa-plus-circle"></i>New</a>
+    <a ng-if="paste.isNew" class="function pull-left" ng-click="paste.SavePaste()"><i class="fa fa-save"></i>Save</a>
+    <div class="pull-right">
+        <select ng-model="paste.pasteFormat">
+            <option value="">auto</option>
+            <option value="plaintext">plain text</option>
+            <option value="html">html</option>
+            <option value="js">javascript</option>
+            <option value="css">css</option>
+            <option value="cs">c#</option>
+        </select>
+    </div>
+</div>
+<div class="header-spacer"></div>
+
+<div class="paste-area">
+    <div ng-if="paste.isNew">
+            <div class="line-numbers noselect">
+                <div>&gt;</div>
+            </div>
+        <textarea autofocus ng-model="paste.pasteContent"></textarea>
+    </div>
+
+    <div ng-if="!paste.isNew">
+        <div ng-if="paste.pasteFormat != 'plaintext'">
+            <div class="line-numbers noselect">
+                <div ng-repeat="i in paste.GetNumber(paste.lineCount) track by $index" id="L{{$index+1}}"  ng-class="{selected: paste.location.hash() == 'L'+($index+1)}" ng-click="paste.ClickLineNumber($index+1)">{{$index+1}}</div>
+            </div>
+            <div hljs source="paste.pasteContent" language="{{paste.pasteFormat}}"></div>
+        </div>
+        <div ng-if="paste.pasteFormat == 'plaintext'">
+            <pre class="wrap">{{paste.pasteContent}}</pre>
+        </div>
+    </div>
+</div>

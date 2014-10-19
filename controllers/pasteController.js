@@ -19,7 +19,7 @@
 			});
 		});
 
-		app.post("/api/paste/", funtion(req, res) {
+		app.post("/api/paste/", function(req, res) {
 			var pasteData = req.body.pasteData;
 			var pasteKey = keyService.GetKey();
 
@@ -31,7 +31,7 @@
 					res.set("Content-Type", "application/json");
 					res.send(data);
 				}
-			})
+			});
 		});
 	};
 
