@@ -24,7 +24,7 @@ pasteApp.factory('PasteService',
                 $http({
                     method: "POST",
                     url: "/api/paste",
-                    data: pasteContent
+                    data: JSON.stringify({pasteData: pasteContent})
                 })
                 .success(function (data, status, headers, config) {
                     deferred.resolve(data);

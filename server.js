@@ -1,6 +1,9 @@
 var http = require("http");
 var express = require("express");
+var bodyParser = require('body-parser');
+
 var app = express();
+app.use(bodyParser.json());
 
 var controllers = require("./controllers");
 
@@ -12,5 +15,6 @@ var server = http.createServer(app);
 // set the public static resource folder
 app.use('/', express.static(__dirname + "/public"));
 app.use('/dist', express.static(__dirname + "/dist"));
+
 
 server.listen(3000);

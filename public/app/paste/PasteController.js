@@ -47,7 +47,7 @@ pasteApp.controller('PasteController',
         $scope.paste.SavePaste = function() {
             PasteService.SavePaste($scope.paste.pasteContent)
             .then(function (data) {
-                $state.go('paste', {'pasteKey': data.key + '.' + $scope.paste.pasteFormat});
+                $state.go('paste', {'pasteKey': data.pasteKey + '.' + $scope.paste.pasteFormat});
             });
         };
         
