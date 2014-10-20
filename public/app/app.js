@@ -6,12 +6,10 @@ var pasteApp = angular.module('pasteApp', ['ui.router', 'hljs'])
     .config(
     ['$urlRouterProvider', '$stateProvider', 'routes', '$locationProvider',
     function ($urlRouterProvider, $stateProvider, routes, $locationProvider) {
-        // $locationProvider.html5Mode({
-        //     enabled: true,
-        //     requireBase: false
-        // });
-    
-    
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
 
         $urlRouterProvider.otherwise('/');
         var allRoutes = routes.routes;
