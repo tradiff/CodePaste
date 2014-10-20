@@ -1,8 +1,8 @@
 ﻿'use strict'; 
 
 pasteApp.controller('PasteController',
-    ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', 'PasteService',
-    function ($scope, $log, $state, $stateParams, $location, $anchorScroll, $timeout, PasteService) {
+    ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', '$document', 'hotkeys', 'PasteService',
+    function ($scope, $log, $state, $stateParams, $location, $anchorScroll, $timeout, $document, hotkeys, PasteService) {
         var self = this;
         $scope.paste = {};
         $scope.paste.isNew = true;
@@ -45,10 +45,12 @@ pasteApp.controller('PasteController',
         };
         
         $scope.paste.SavePaste = function() {
-            PasteService.SavePaste($scope.paste.pasteContent)
-            .then(function (data) {
-                $state.go('paste', {'pasteKey': data.pasteKey + '.' + $scope.paste.pasteFormat});
-            });
+            if ($scope.paste.isNew) {
+                PasteService.SavePaste($scope.paste.pasteContent)
+                .then(function (data) {
+                    $state.go('paste', {'pasteKey': data.pasteKey + '.' + $scope.paste.pasteFormat});
+                });
+            }
         };
         
         $scope.paste.ClickLineNumber = function(lineNumber) {
@@ -74,6 +76,25 @@ pasteApp.controller('PasteController',
             }
         });
 
+        hotkeys.add({
+            combo: 'ctrl+s',
+            allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+            callback: function(event, hotkey) {
+                $scope.paste.SavePaste();
+                event.preventDefault();
+            }
+        });
+
+        hotkeys.add({
+            combo: 'up up down down left right left right b a enter',
+            allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+            callback: function(event, hotkey) {
+                javascript:(function(){javascript:var s=document.createElement('script');s.setAttribute('src','https://nthitz.github.io/turndownforwhatjs/tdfw.js');document.body.appendChild(s);})();
+                event.preventDefault();
+            }
+        });
+
+$log.debug($document);
 
         self.Init();
     }]

@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var pasteApp = angular.module('pasteApp', ['ui.router', 'hljs'])
+var pasteApp = angular.module('pasteApp', ['ui.router', 'hljs', 'cfp.hotkeys'])
     .config(
     ['$urlRouterProvider', '$stateProvider', 'routes', '$locationProvider',
     function ($urlRouterProvider, $stateProvider, routes, $locationProvider) {
