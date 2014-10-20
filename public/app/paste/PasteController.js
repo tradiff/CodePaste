@@ -1,8 +1,8 @@
 ﻿'use strict'; 
 
 pasteApp.controller('PasteController',
-    ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', '$document', 'hotkeys', 'PasteService',
-    function ($scope, $log, $state, $stateParams, $location, $anchorScroll, $timeout, $document, hotkeys, PasteService) {
+    ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', 'hotkeys', 'PasteService',
+    function ($scope, $log, $state, $stateParams, $location, $anchorScroll, $timeout, hotkeys, PasteService) {
         var self = this;
         $scope.paste = {};
         $scope.paste.isNew = true;
@@ -93,8 +93,6 @@ pasteApp.controller('PasteController',
                 event.preventDefault();
             }
         });
-
-$log.debug($document);
 
         self.Init();
     }]
