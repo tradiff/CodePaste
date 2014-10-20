@@ -1,4 +1,4 @@
-﻿'use strict';
+﻿'use strict'; 
 
 pasteApp.controller('PasteController',
     ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', 'PasteService',
