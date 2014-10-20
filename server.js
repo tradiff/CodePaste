@@ -17,7 +17,7 @@ app.use('/', express.static(__dirname + "/public"));
 app.use('/dist', express.static(__dirname + "/dist"));
 
 app.use(function(req, res) {
-    res.sendfile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
-server.listen(3000);
+server.listen(7777);
