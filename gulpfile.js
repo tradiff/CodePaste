@@ -43,3 +43,6 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default', ['lib_scripts', 'scripts', 'watch']);
+
+// Install Task
+gulp.task('install', ['lib_scripts', 'scripts']);
