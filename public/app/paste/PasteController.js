@@ -72,7 +72,10 @@ pasteApp.controller('PasteController',
         
         $scope.$watch('paste.pasteFormat', function(newValue, oldValue) {
             if (!$scope.paste.isNew) {
-                $state.go('paste', {'pasteKey': $scope.paste.pasteKey + '.' + $scope.paste.pasteFormat});
+                var extension = '';
+                if ($scope.paste.pasteFormat)
+                    var extension = '.' + $scope.paste.pasteFormat;
+                $state.go('paste', {'pasteKey': $scope.paste.pasteKey + extension});
             }
         });
 
