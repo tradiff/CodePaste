@@ -9,6 +9,7 @@ pasteApp.controller('PasteController',
         $scope.paste.pasteKey = '';
         $scope.paste.pasteFormat = '';
         $scope.paste.pasteContent = '';
+        $scope.paste.validLanguage = true;
         $scope.paste.location = $location;
         
         self.Init = function () {
@@ -76,6 +77,13 @@ pasteApp.controller('PasteController',
                 if ($scope.paste.pasteFormat)
                     var extension = '.' + $scope.paste.pasteFormat;
                 $state.go('paste', {'pasteKey': $scope.paste.pasteKey + extension});
+            }
+
+            if ($scope.paste.pasteFormat == '') {
+                $scope.paste.validLanguage = true;
+            }
+            else {
+                $scope.paste.validLanguage = hljs.getLanguage($scope.paste.pasteFormat);
             }
         });
 
