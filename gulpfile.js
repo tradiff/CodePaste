@@ -22,7 +22,6 @@ gulp.task('scripts', function() {
 // Concatenate & Minify lib JS
 gulp.task('lib_scripts', function() {
     return gulp.src([
-        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/highlightjs/highlight.pack.js',
         'public/lib/angular/angular.min.js',
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
