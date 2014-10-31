@@ -30,7 +30,7 @@
                 <div class="line"
                     ng-repeat="i in paste.GetNumber(paste.lineCount) track by $index"
                     id="L{{$index+1}}"
-                    ng-class="{selected: paste.location.hash() == 'L'+($index+1)}"
+                    ng-class="{selected: (paste.taggedLines.indexOf($index+1) > -1)}"
                 >
                     <div class="line-number"
                         ng-click="paste.ClickLineNumber($index+1)"

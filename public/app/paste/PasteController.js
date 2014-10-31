@@ -1,8 +1,8 @@
 ﻿'use strict'; 
 
 pasteApp.controller('PasteController',
-    ['$scope', '$log', '$state', '$stateParams', '$location', '$anchorScroll', '$timeout', 'hotkeys', 'PasteService',
-    function ($scope, $log, $state, $stateParams, $location, $anchorScroll, $timeout, hotkeys, PasteService) {
+    ['$scope', '$log', '$state', '$stateParams', '$location', '$timeout', 'hotkeys', 'smoothScroll', 'PasteService',
+    function ($scope, $log, $state, $stateParams, $location, $timeout, hotkeys, smoothScroll, PasteService) {
         var self = this;
         $scope.paste = {};
         $scope.paste.isNew = true;
@@ -11,7 +11,8 @@ pasteApp.controller('PasteController',
         $scope.paste.pasteContent = '';
         $scope.paste.validLanguage = true;
         $scope.paste.location = $location;
-        
+        $scope.paste.taggedLines = [];
+
         self.Init = function () {
             if ($stateParams.format) {
                 $state.go('paste', {'pasteKey': $stateParams.pasteKey + '.' + $stateParams.format});
@@ -22,8 +23,16 @@ pasteApp.controller('PasteController',
                 $scope.paste.pasteKey = pasteKeyParts[0];
                 $scope.paste.pasteFormat = pasteKeyParts[1] || '';
             }
-            $anchorScroll.yOffset = 100;   // always scroll by 100 extra pixels
             $scope.paste.LoadPaste();
+
+            var taggedLines = $location.hash().split(',');
+            for (var i = 0; i < taggedLines.length; i++) {
+                var num = parseInt(taggedLines[i]);
+                if (!isNaN(num) && num > 0) {
+                    $scope.paste.taggedLines.push(num);
+                }
+            };
+            $location.hash($scope.paste.taggedLines.join());
         };
         
         $scope.paste.LoadPaste = function() {
@@ -42,7 +51,11 @@ pasteApp.controller('PasteController',
         };
         
         $scope.paste.AutoScroll = function() {
-            $anchorScroll();
+            var element = document.getElementById('L' + $scope.paste.taggedLines[0]);
+            if (element)
+                smoothScroll(element, {
+                    offset: 100
+                });
         };
         
         $scope.paste.SavePaste = function() {
@@ -55,16 +68,18 @@ pasteApp.controller('PasteController',
         };
         
         $scope.paste.ClickLineNumber = function(lineNumber) {
-            var newHash = 'L' + lineNumber;
-            if ($location.hash() !== newHash) {
-              // set the $location.hash to `newHash` and
-              // $anchorScroll will automatically scroll to it
-              $location.hash(newHash);
-            } else {
-              // call $anchorScroll() explicitly,
-              // since $location.hash hasn't changed
-              $anchorScroll();
+            var lineNumIndex = $scope.paste.taggedLines.indexOf(lineNumber);
+            if (lineNumIndex> -1) {
+                // remove
+                $scope.paste.taggedLines.splice(lineNumIndex, 1);
             }
+            else {
+                // add
+                $scope.paste.taggedLines.push(lineNumber);
+            }
+            // setting hash to empty string reloads the page, so lets avoid that by using '0'
+            var newHash = $scope.paste.taggedLines.join() || '0';
+            $location.hash(newHash);
         };
         
         $scope.paste.GetNumber = function(num) {
@@ -91,8 +106,8 @@ pasteApp.controller('PasteController',
             combo: 'ctrl+s',
             allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
             callback: function(event, hotkey) {
-                $scope.paste.SavePaste();
                 event.preventDefault();
+                $scope.paste.SavePaste();
             }
         });
 

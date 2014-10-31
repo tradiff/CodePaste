@@ -26,7 +26,8 @@ gulp.task('lib_scripts', function() {
         'public/lib/angular/angular.min.js',
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/angular-highlightjs/angular-highlightjs.min.js',
-        'public/lib/angular-hotkeys/build/hotkeys.min.js'
+        'public/lib/angular-hotkeys/build/hotkeys.min.js',
+        'public/lib/ngSmoothScroll/angular-smooth-scroll.min.js'
         ])
         .pipe(concat('lib-all.js'))
         .pipe(gulp.dest('dist'))
