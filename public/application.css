@@ -29,7 +29,7 @@ body {
     right: 0;
     background-color: #333;
     color: #eee;
-    z-index: 1;
+    z-index: 2;
     padding: 0 5px;
     color: #66d9ef;
     font-family: monospace;
@@ -85,33 +85,40 @@ textarea {
     font-size: 13px;
 }
 
-.line-numbers {
+.lines {
     position: absolute;
     left: 0;
     top: 0;
-    width: 20px;
-    text-align: right;
+    right: 0;
     font-size: 13px;
     font-family: monospace;
+    z-index: 0;
+}
+
+.line-number {
+    width: 30px;
+    text-align: right;
     color: #107D92;
-}
-
-.line-numbers div:nth-child(5n) {
-    color: #66d9ef;
-}
-
-.line-numbers .selected {
-    background-color: #e6db74;
-    color: #333 !important;
-}
-
-.line-numbers div {
     cursor: pointer;
 }
 
-.line-numbers div:hover {
+.line-number:hover {
     background-color: #555;
     color: #66d9ef;
+}
+
+.lines .line:nth-child(5n) .line-number,
+.lines .selected .line-number {
+    color: #66d9ef;
+}
+
+.lines .selected {
+    background-color: #065064;
+}
+
+.code {
+    position: relative;
+    z-index: 1;
 }
 
 pre {
