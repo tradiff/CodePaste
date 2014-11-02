@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var plumber = require('gulp-plumber');//To prevent pipe breaking caused by errors at 'watch'
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
@@ -12,6 +13,9 @@ gulp.task('scripts', function() {
         'public/**/*.js',
         '!public/lib/**'
         ])
+        .pipe(plumber({
+            errorHandler: handleError
+        }))
         .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
@@ -29,6 +33,9 @@ gulp.task('lib_scripts', function() {
         'public/lib/angular-hotkeys/build/hotkeys.min.js',
         'public/lib/ngSmoothScroll/angular-smooth-scroll.min.js'
         ])
+        .pipe(plumber({
+            errorHandler: handleError
+        }))
         .pipe(concat('lib-all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('lib-all.min.js'))
@@ -37,12 +44,21 @@ gulp.task('lib_scripts', function() {
 });
 
 // Watch Files For Changes
-gulp.task('watch', function() {
+gulp.task('_watch', function() {
     gulp.watch('public/**/*.js', ['lib_scripts', 'scripts']);
 });
 
 // Default Task
-gulp.task('default', ['lib_scripts', 'scripts', 'watch']);
+gulp.task('default', ['lib_scripts', 'scripts']);
 
 // Install Task
-gulp.task('install', ['lib_scripts', 'scripts']);
+gulp.task('install', ['default']);
+
+// Watch task
+gulp.task('watch', ['lib_scripts', 'scripts', '_watch']);
+
+
+var handleError = function (err) {
+  console.log(err.toString());
+  this.emit('end');
+};
