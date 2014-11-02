@@ -69,7 +69,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    padding-left: 30px;
+    padding-left: 35px;
 }
 
 textarea {
@@ -93,6 +93,12 @@ textarea {
     font-size: 13px;
     font-family: monospace;
     z-index: 0;
+    counter-reset: line-numbering;
+}
+
+.line-number::before {
+    content: counter(line-numbering);
+    counter-increment: line-numbering;
 }
 
 .line-number {
