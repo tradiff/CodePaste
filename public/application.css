@@ -93,12 +93,10 @@ textarea {
     font-size: 13px;
     font-family: monospace;
     z-index: 0;
-    counter-reset: line-numbering;
 }
 
 .line-number::before {
-    content: counter(line-numbering);
-    counter-increment: line-numbering;
+    content: attr(data-line-number);
 }
 
 .line-number {
