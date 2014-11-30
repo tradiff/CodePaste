@@ -18,8 +18,12 @@
 
 <div class="paste-area">
     <div ng-if="paste.isNew">
-        <div class="line-numbers noselect">
-            <div>&gt;</div>
+        <div class="lines noselect">
+                <div class="line">
+                    <div class="line-number"
+                        data-line-number="&gt;">
+                    </div><!-- line-number -->
+                </div> <!-- line -->
         </div>
         <textarea autofocus ng-model="paste.pasteContent" ng-trim="false"></textarea>
     </div>
