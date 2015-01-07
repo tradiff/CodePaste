@@ -83,6 +83,7 @@ textarea {
     outline: none;
     resize: none;
     font-size: 13px;
+    position: relative;
 }
 
 .lines {
