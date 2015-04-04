@@ -143,7 +143,11 @@
         
         function AceLoaded(_editor) {
             vm.aceEditor = _editor;
+            var _session = vm.aceEditor.getSession();
             _editor.setShowPrintMargin(false);
+            if (vm.mode.key === 'txt') {
+                _session.setUseWrapMode(true);
+            }
             
             _editor.on("guttermousedown", function(e){
                 var target = e.domEvent.target;
