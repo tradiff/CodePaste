@@ -1,6 +1,11 @@
 CodePaste
 =========
 
+## Demo
+Try out a demo at http://paste.falk.pw/SparklingDefiantBat.js
+
+Create your own pastes at http://paste.falk.pw/
+
 
 ## Installation
 
