@@ -26,12 +26,12 @@ gulp.task('scripts', function() {
 // Concatenate & Minify lib JS
 gulp.task('lib_scripts', function() {
     return gulp.src([
-        'public/lib/highlightjs/highlight.pack.js',
         'public/lib/angular/angular.min.js',
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-        'public/lib/angular-highlightjs/angular-highlightjs.min.js',
         'public/lib/angular-hotkeys/build/hotkeys.min.js',
-        'public/lib/ngSmoothScroll/angular-smooth-scroll.min.js'
+        'public/lib/ngSmoothScroll/angular-smooth-scroll.min.js',
+        'public/lib/ace-builds/src-min-noconflict/ace.js',
+        'public/lib/angular-ui-ace/ui-ace.min.js'        
         ])
         .pipe(plumber({
             errorHandler: handleError

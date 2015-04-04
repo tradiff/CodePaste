@@ -1,52 +1,21 @@
-﻿<div class="header noselect">
+<div class="header noselect">
     <div class="logo pull-left">&lt;CodePaste /&gt;</div>
     <a class="function pull-left" ui-sref="paste_new"><i class="fa fa-plus-circle"></i>New</a>
     <a ng-if="paste.isNew" class="function pull-left" ng-click="paste.SavePaste()"><i class="fa fa-save"></i>Save</a>
     <div class="pull-right">
-        <select ng-model="paste.pasteFormat">
-            <option value="">auto</option>
-            <option value="txt">plain text</option>
-            <option value="html">html</option>
-            <option value="js">javascript</option>
-            <option value="css">css</option>
-            <option value="cs">c#</option>
-            <option value="sql">sql</option>
+        <select ng-model="paste.mode" ng-options="item as item.desc for item in paste.allModes">
         </select>
     </div>
 </div>
 <div class="header-spacer"></div>
 
 <div class="paste-area">
-    <div ng-if="paste.isNew">
-        <div class="lines noselect">
-                <div class="line">
-                    <div class="line-number"
-                        data-line-number="&gt;">
-                    </div><!-- line-number -->
-                </div> <!-- line -->
-        </div>
-        <textarea autofocus ng-model="paste.pasteContent" ng-trim="false"></textarea>
-    </div>
-
-    <div ng-if="!paste.isNew">
-        <div ng-if="paste.validLanguage">
-            <div class="lines noselect">
-                <div class="line"
-                    ng-repeat="i in paste.GetNumber(paste.lineCount) track by $index"
-                    id="L{{$index+1}}"
-                    ng-class="{selected: (paste.taggedLines.indexOf($index+1) > -1)}"
-                >
-                    <div class="line-number"
-                        ng-click="paste.ClickLineNumber($index+1)"
-                        data-line-number="{{$index+1}}"
-                    >
-                    </div><!-- line-number -->
-                </div> <!-- line -->
-            </div> <!-- lines -->
-            <div class="code" hljs source="paste.pasteContent" language="{{paste.pasteFormat}}"></div>
-        </div>
-        <div ng-if="!paste.validLanguage">
-            <pre class="wrap">{{paste.pasteContent}}</pre>
-        </div>
-    </div>
+    <div ui-ace="{
+                 theme:'monokai',
+                 mode: paste.mode.aceKey,
+                 onLoad: paste.AceLoaded
+                 }" 
+         ng-model="paste.pasteContent"
+         ng-readonly="!paste.isNew"
+         ></div>
 </div>

@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var pasteApp = angular.module('pasteApp', ['ui.router', 'hljs', 'cfp.hotkeys', 'smoothScroll'])
+var pasteApp = angular.module('pasteApp', ['ui.router', 'cfp.hotkeys', 'ui.ace'])
     .config(
     ['$urlRouterProvider', '$stateProvider', 'routes', '$locationProvider',
     function ($urlRouterProvider, $stateProvider, routes, $locationProvider) {
@@ -17,6 +17,8 @@ var pasteApp = angular.module('pasteApp', ['ui.router', 'hljs', 'cfp.hotkeys', '
             var route = allRoutes[i];
             $stateProvider.state(route);
         }
+        
+        ace.config.set('basePath', '/lib/ace-builds/src-min-noconflict/');
 
     }]
 )

@@ -16,6 +16,7 @@ body {
     position: relative;
     background-color: #23241f;
     color: #eee;
+    margin: 0;
 }
 
 ::selection {
@@ -69,77 +70,15 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    padding-left: 35px;
 }
 
-textarea {
-    background: transparent;
-    border: 0px;
-    color: #fff;
-    padding: 0px;
+.ace_editor {
     width: 100%;
     height: 100%;
-    font-family: monospace;
-    outline: none;
-    resize: none;
-    font-size: 13px;
-    position: relative;
 }
 
-.lines {
+.tagged-line {
     position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    font-size: 13px;
-    font-family: monospace;
-    z-index: 0;
-}
-
-.line-number::before {
-    content: attr(data-line-number);
-}
-
-.line-number {
-    width: 30px;
-    text-align: right;
-    color: #107D92;
-    cursor: pointer;
-}
-
-.line-number:hover {
-    background-color: #555;
-    color: #66d9ef;
-}
-
-.lines .line:nth-child(5n) .line-number,
-.lines .selected .line-number {
-    color: #66d9ef;
-}
-
-.lines .selected {
+    z-index: 2;
     background-color: #065064;
-}
-
-.code {
-    position: relative;
-    z-index: 1;
-}
-
-pre {
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-    border: 0px;
-    outline: none;
-    font-size: 13px;
-}
-
-pre code {
-    padding: 0 !important;
-    background-color: transparent !important;
-}
-
-pre.wrap {
-    white-space: pre-wrap;
 }
