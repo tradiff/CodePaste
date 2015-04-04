@@ -52,8 +52,22 @@ body {
     background-color: #555;
 }
 
-.header select {
-    padding: 4px;
+.header .mode-picker {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.header .mode {
+    border-right: 1px solid #ddd;
+}
+.header .mode:last-child {
+    border-right: 0;
+}
+
+.header .mode.selected {
+    background-color: #065064;
+    color: #ddd;
 }
 
 .header .fa {
