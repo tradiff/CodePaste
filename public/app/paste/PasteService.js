@@ -1,10 +1,16 @@
-﻿'use strict';
-
-pasteApp.factory('PasteService',
-    ['$log', '$http', '$q',
-    function ($log, $http, $q) {
-        return {
-            GetPaste: function (pasteKey) {
+(function() {
+    'use strict';
+    pasteApp.factory('PasteService', PasteService);
+    
+    PasteService.$inject = ['$http', '$log', '$q'];
+        function PasteService ($http, $log, $q) {
+            
+            return {
+                GetPaste: GetPaste,
+                SavePaste: SavePaste
+            };
+            
+            function GetPaste(pasteKey) {
                 var deferred = $q.defer();
                 $http({
                     method: "GET",
@@ -17,9 +23,9 @@ pasteApp.factory('PasteService',
                     deferred.reject(data);
                 });
                 return deferred.promise;            
-            },
-            
-            SavePaste: function (pasteContent) {
+            }
+
+            function SavePaste(pasteContent) {
                 var deferred = $q.defer();
                 $http({
                     method: "POST",
@@ -34,6 +40,5 @@ pasteApp.factory('PasteService',
                 });
                 return deferred.promise;            
             }
-        };
-    }]
-);
+        }
+})();

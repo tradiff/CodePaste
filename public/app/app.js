@@ -1,11 +1,13 @@
-'use strict';
+(function () {
+    'use strict';
 
+window.pasteApp = angular.module('pasteApp', ['ui.router', 'cfp.hotkeys', 'ui.ace'])
+    .config(Config)
+    .run(Run);
+    
+    Config.$inject = ['$urlRouterProvider', '$stateProvider', 'routes', '$locationProvider'];
 
-// Declare app level module which depends on filters, and services
-var pasteApp = angular.module('pasteApp', ['ui.router', 'cfp.hotkeys', 'ui.ace'])
-    .config(
-    ['$urlRouterProvider', '$stateProvider', 'routes', '$locationProvider',
-    function ($urlRouterProvider, $stateProvider, routes, $locationProvider) {
+    function Config($urlRouterProvider, $stateProvider, routes, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
@@ -19,22 +21,24 @@ var pasteApp = angular.module('pasteApp', ['ui.router', 'cfp.hotkeys', 'ui.ace']
         }
         
         ace.config.set('basePath', '/lib/ace-builds/src-min-noconflict/');
+    }
 
-    }]
-)
-.run(['$rootScope', '$state', '$q', 'routes',
-    function ($rootScope, $state, $q, routes) {
+    
+    Run.$inject = ['$rootScope', '$state', '$q', 'routes'];
+    
+    function Run($rootScope, $state, $q, routes) {
         var CheckRedirects = function(currentStateName) {
             var redirects = routes.redirects;
             return redirects[currentStateName];
         };
 
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        //apply custom redirects (this replaces $urlRouterProvider.when)
-        if (CheckRedirects(toState.name)) {
-            event.preventDefault();
-            $state.go(CheckRedirects(toState.name), toParams);
-        }
-    });
-}]);
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            //apply custom redirects (this replaces $urlRouterProvider.when)
+            if (CheckRedirects(toState.name)) {
+                event.preventDefault();
+                $state.go(CheckRedirects(toState.name), toParams);
+            }
+        });
+    }
 
+})();

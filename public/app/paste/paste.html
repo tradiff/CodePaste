@@ -1,21 +1,23 @@
-<div class="header noselect">
-    <div class="logo pull-left">&lt;CodePaste /&gt;</div>
-    <a class="function pull-left" ui-sref="paste_new"><i class="fa fa-plus-circle"></i>New</a>
-    <a ng-if="paste.isNew" class="function pull-left" ng-click="paste.SavePaste()"><i class="fa fa-save"></i>Save</a>
-    <div class="pull-right">
-        <select ng-model="paste.mode" ng-options="item as item.desc for item in paste.allModes">
-        </select>
+<div ng-controller="PasteController as paste">
+    <div class="header noselect">
+        <div class="logo pull-left">&lt;CodePaste /&gt;</div>
+        <a class="function pull-left" ui-sref="paste_new"><i class="fa fa-plus-circle"></i>New</a>
+        <a ng-if="paste.isNew" class="function pull-left" ng-click="paste.SavePaste()"><i class="fa fa-save"></i>Save</a>
+        <div class="pull-right">
+            <select ng-model="paste.mode" ng-options="item as item.desc for item in paste.allModes">
+            </select>
+        </div>
     </div>
-</div>
-<div class="header-spacer"></div>
+    <div class="header-spacer"></div>
 
-<div class="paste-area">
-    <div ui-ace="{
-                 theme:'monokai',
-                 mode: paste.mode.aceKey,
-                 onLoad: paste.AceLoaded
-                 }" 
-         ng-model="paste.pasteContent"
-         ng-readonly="!paste.isNew"
-         ></div>
+    <div class="paste-area">
+        <div ui-ace="{
+                     theme:'monokai',
+                     mode: paste.mode.aceKey,
+                     onLoad: paste.AceLoaded
+                     }" 
+             ng-model="paste.pasteContent"
+             ng-readonly="!paste.isNew"
+             ></div>
+    </div>
 </div>
