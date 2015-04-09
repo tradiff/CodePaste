@@ -165,6 +165,7 @@
                     ScrollToLine(vm.taggedLines[0]);
                 }, 100);
             }
+            vm.aceEditor.focus();
         }
         
         function ScrollToLine(line) {
