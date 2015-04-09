@@ -74,10 +74,6 @@ body {
     margin-right: 5px;
 }
 
-.header-spacer {
-    height: 35px;
-}
-
 .paste-area {
     position: absolute;
     top: 35px;

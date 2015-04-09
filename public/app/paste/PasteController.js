@@ -79,7 +79,6 @@
                 .then(function (data) {
                     vm.pasteData = data;
                     vm.pasteContent = data.data;
-                    vm.lineCount = data.data.split("\n").length;
                 });
             }
         }
