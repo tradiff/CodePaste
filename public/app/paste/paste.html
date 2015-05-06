@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="paste-area">
+    <div class="paste-area" ng-class="{ onscreen: paste.showPasteArea}">
         <div ui-ace="{
                      theme:'monokai',
                      mode: paste.mode.aceKey,

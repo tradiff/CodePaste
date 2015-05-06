@@ -76,11 +76,18 @@ body {
 
 .paste-area {
     position: absolute;
-    top: 35px;
+    top: 29px;
     left: 0;
     right: 0;
     bottom: 0;
+    transition: all .3s ease-in-out;
+    opacity: 0;
 }
+
+.paste-area.onscreen {
+    opacity: 1;
+}
+
 
 .ace_editor {
     width: 100%;

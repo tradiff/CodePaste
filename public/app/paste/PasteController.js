@@ -14,6 +14,7 @@
         vm.location = $location;
         vm.taggedLines = [];
         vm.aceEditor = undefined;
+        vm.showPasteArea = false;
         
         vm.AceLoaded = AceLoaded;
         vm.ForkPaste = ForkPaste;
@@ -63,6 +64,10 @@
             
             SetupWatches();
             SetupHotkeys();
+            
+            $timeout(function() {
+                vm.showPasteArea = true;
+            });
         };
         
         function CheckMode(modeKey) {
