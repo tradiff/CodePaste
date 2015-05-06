@@ -3,6 +3,7 @@
         <div class="logo pull-left">&lt;CodePaste /&gt;</div>
         <a class="function pull-left" ui-sref="paste_new"><i class="fa fa-plus-circle"></i>New</a>
         <a ng-if="paste.isNew" class="function pull-left" ng-click="paste.SavePaste()"><i class="fa fa-save"></i>Save</a>
+        <a ng-if="!paste.isNew" class="function pull-left" ng-click="paste.ForkPaste()"><i class="fa fa-code-fork"></i>Fork</a>
         <div class="mode-picker pull-right">
             <a class="mode pull-left" ng-repeat="mode in paste.allModes" ng-click="paste.mode = mode" ng-class="{selected: paste.mode === mode}">
                 {{mode.desc}}

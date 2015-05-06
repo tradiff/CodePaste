@@ -16,6 +16,7 @@
         vm.aceEditor = undefined;
         
         vm.AceLoaded = AceLoaded;
+        vm.ForkPaste = ForkPaste;
         vm.SavePaste = SavePaste;
         
         vm.allModes = [
@@ -37,6 +38,12 @@
                 var pasteKeyParts = $stateParams.pasteKey.split('.');
                 vm.pasteKey = pasteKeyParts[0];
                 modeKey = pasteKeyParts[1];
+            }
+            else if (PasteService.ForkData) {
+                $log.debug(PasteService.ForkData);
+                vm.pasteContent = PasteService.ForkData.content;
+                modeKey = PasteService.ForkData.mode.key;
+                PasteService.ForkData = undefined;
             }
             else {
                 // new paste
@@ -82,6 +89,16 @@
                 });
             }
         }
+
+        function ForkPaste() {
+            if (!vm.isNew) {
+                PasteService.ForkData = {
+                    content: vm.pasteContent,
+                    mode: vm.mode
+                };
+                $state.go('paste_new');
+            }
+        }
         
         function SavePaste() {
             if (vm.isNew) {
@@ -90,7 +107,7 @@
                     $state.go('paste', {'pasteKey': data.pasteKey + '.' + vm.mode.key});
                 });
             }
-        };
+        }
         
         function ClickLineNumber(lineNumber) {
             var lineNumIndex = vm.taggedLines.indexOf(lineNumber);

@@ -7,7 +7,8 @@
             
             return {
                 GetPaste: GetPaste,
-                SavePaste: SavePaste
+                SavePaste: SavePaste,
+                ForkData: undefined
             };
             
             function GetPaste(pasteKey) {
